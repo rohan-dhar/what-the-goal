@@ -1,0 +1,39 @@
+* {
+	padding: 0;
+	margin: 0;
+	font-family: var(--font);
+	box-sizing: border-box;
+	cursor: none;
+}
+:root {
+	font-size: 10pt;
+
+	--red: #ff5575;
+	--blue: #5289ff;
+	--green: #1bd6ae;
+	--yellow: #ffa155;
+	--dark-blue: #383079;
+	--dark-blue-2: #131024;
+
+	--cursor: #000000aa;
+
+	--text: #fff;
+	--text-light: rgba(255, 255, 255, 0.3);
+	--text-light-2: rgba(255, 255, 255, 0.55);
+
+	--easing: cubic-bezier(0.68, 0.28, 0.82, 0.64);
+	--font: Poppins;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+body {
+	height: 100vh;
+	width: 100vw;
+	overflow-x: hidden;
+	background-attachment: fixed;
+	background-color: var(--blue);
+}
