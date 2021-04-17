@@ -16,7 +16,19 @@
     <title>{% block title %} {% endblock %} | What the goal</title>
 </head>
 <body>
-    <header class="header"></header>
+    <header class="header">
+        
+        <section class="header-logo">
+            <img src="{{ url_for('static', filename='img/logo.svg') }}" alt="" />
+            What the <b>goal</b>
+        </section>
+        <section class="header-content">
+            <h2>{% block header %} {% endblock header %}</h2>
+            {% if g.user_id %}
+            <a href="{{ url_for('auth.logout') }}"><button class="btn"> Logout  </button></a>
+            {% endif %}
+        </section>
+    </header>
     
     {% block content %}
     {% endblock content %}

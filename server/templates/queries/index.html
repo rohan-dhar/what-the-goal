@@ -1,5 +1,5 @@
-{% extends 'base.html' %} {% block title %} Query {% endblock title %} {% block
-content %}
+{% extends 'base.html' %} {% block header %} Select a query to run {% endblock
+header %} {% block title %} Query {% endblock title %} {% block content %}
 
 <main class="main">
 	<h1 class="head">Available queries for you</h1>
@@ -7,9 +7,9 @@ content %}
 	<section class="sub-main query-item">
 		<h3>{{query.heading}}</h3>
 		<p class="text">{{query.text}}</p>
-		<button class="btn">
-			<a href="{{query.url}}">Run now</a>
-		</button>
+		<a href="{{query.url}}">
+			<button class="btn">Run now</button>
+		</a>
 	</section>
 	{% endfor %}
 </main>
