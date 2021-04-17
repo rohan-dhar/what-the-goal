@@ -1,5 +1,6 @@
+from flask.helpers import url_for
 from .generic_views import LoggedInView, QueryView
-from flask import Blueprint, g
+from flask import Blueprint, g, abort
 
 
 class QueryWrapper:
@@ -52,9 +53,24 @@ class UnauthView(LoggedInView):
 class IndexView(LoggedInView):
     template = "queries/index.html"
 
+    def render(
+        self,
+    ):
 
-class ShowQueryView(QueryView):
-    query = QueryWrapper(
+        query_urls = [
+            {
+                "url": url_for("queries.run", query_idx=idx),
+                "heading": queries[idx].heading,
+                "text": queries[idx].text,
+            }
+            for idx in range(len(queries))
+        ]
+
+        return super().render(queries=query_urls)
+
+
+queries = [
+    QueryWrapper(
         "This is a heading",
         "This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. ",
         qry="",
@@ -71,10 +87,21 @@ class ShowQueryView(QueryView):
         headers=["Name", "Age (Years)", "Height (m)"],
         method="POST",
     )
+]
+
+
+class ShowQueryView(QueryView):
+    query = None
+
+    def dispatch_request(self, query_idx):
+        if query_idx < 0 or query_idx >= len(queries):
+            abort(404)
+        self.query = queries[query_idx]
+        return super().dispatch_request()
 
 
 queries_bp = Blueprint("queries", __name__, url_prefix="/queries")
 
-queries_bp.add_url_rule("/show", view_func=ShowQueryView.as_view(name="show"))
+queries_bp.add_url_rule("/<int:query_idx>", view_func=ShowQueryView.as_view(name="run"))
 queries_bp.add_url_rule("/unauth", view_func=UnauthView.as_view(name="unauth"))
 queries_bp.add_url_rule("/", view_func=IndexView.as_view(name="index"))

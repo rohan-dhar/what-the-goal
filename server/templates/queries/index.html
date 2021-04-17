@@ -2,7 +2,16 @@
 content %}
 
 <main class="main">
-	<h1 class="head">All queries here!</h1>
+	<h1 class="head">Available queries for you</h1>
+	{% for query in queries %}
+	<section class="sub-main query-item">
+		<h3>{{query.heading}}</h3>
+		<p class="text">{{query.text}}</p>
+		<button class="btn">
+			<a href="{{query.url}}">Run now</a>
+		</button>
+	</section>
+	{% endfor %}
 </main>
 
 {% endblock %}

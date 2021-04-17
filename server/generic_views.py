@@ -44,9 +44,6 @@ class QueryView(LoggedInView):
 
     methods = ["GET", "POST"]
 
-    def get_res(self):
-        return []
-
     def render(self, *args, **kwargs):
         if request.method != "GET" and request.method != self.query.method:
             return f"{request.method} method not allowed for this route!"

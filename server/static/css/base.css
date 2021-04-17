@@ -181,7 +181,7 @@ table {
 }
 
 table thead {
-	background-color: var(--red);
+	background-color: var(--blue);
 }
 
 table th {
@@ -198,4 +198,16 @@ table th {
 
 table tr:nth-of-type(2n) {
 	background-color: var(--card-table-2);
+}
+
+.query-item h3 {
+	font-size: 1.3rem;
+}
+
+.query-item .text {
+	font-size: 1rem;
+}
+
+.query-item .btn {
+	margin-top: 10px;
 }
