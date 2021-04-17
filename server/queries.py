@@ -38,12 +38,9 @@ class QueryWrapper:
         }
 
     def get_res(self):
-        return [
-            ["Bob", "2000", "21"],
-            ["Bob", "2000", "21"],
-            ["Bob", "2000", "21"],
-            ["Bob", "2000", "21"],
-        ]
+        with g.db.cursor() as cursor:
+            cursor.execute("SHOW TABLES")
+        return []
 
 
 class UnauthView(LoggedInView):
@@ -118,7 +115,6 @@ class ShowQueryView(QueryView):
 
 
 queries_bp = Blueprint("queries", __name__, url_prefix="/queries")
-
 queries_bp.add_url_rule("/<int:query_idx>", view_func=ShowQueryView.as_view(name="run"))
 queries_bp.add_url_rule("/unauth", view_func=UnauthView.as_view(name="unauth"))
 queries_bp.add_url_rule("/", view_func=IndexView.as_view(name="index"))
