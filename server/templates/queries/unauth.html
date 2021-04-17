@@ -1,0 +1,15 @@
+{% extends 'base.html' %} {% block title %} Query {% endblock title %} {% block
+content %}
+
+<main class="main">
+	<h1 class="head-3">You are autharized to perform this query</h1>
+	<p class="text">
+		Try to login as a higher privilege user, or try another query from the
+		home page.
+	</p>
+	<button class="btn">
+		<a href="{{ url_for('queries.index') }}">Back home</a>
+	</button>
+</main>
+
+{% endblock %}

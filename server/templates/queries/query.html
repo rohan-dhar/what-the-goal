@@ -1,0 +1,52 @@
+{% extends 'base.html' %} {% block title %} Query {% endblock title %} {% block
+content %}
+
+<main class="main">
+	<h1 class="head">{{heading}}</h1>
+	<p class="text">{{text}}</p>
+	{% if params|length > 0 %}
+        <form class="sub-main query-params" method="{{method}}" action="#">
+            <h3>Filter your query</h3>
+                {% for param in params %}        
+                    <input 
+                        class="inp"
+                        {% for name, value in param.items() %}
+                            {{ name }}="{{ value }}"
+                        {% endfor %}
+                    />
+                {% endfor %}
+                <button class='btn'>Go</button>
+        </form>    
+    {% endif %}
+
+	{% if results|length > 0 %}
+        <section class="sub-main query-results">
+            <h3>Query Results</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            {% for header in headers %}
+                                <th>{{ header }}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in results %}
+                            <tr>
+                                <td>{{ loop.index}}</td>
+                                {% for value in row %}
+                                    <td>{{ value }}</td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+        </form>    
+    {% endif %}
+
+
+    </section>
+</main>
+
+{% endblock %}
