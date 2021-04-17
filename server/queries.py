@@ -71,7 +71,7 @@ class IndexView(LoggedInView):
 
 queries = [
     QueryWrapper(
-        "This is a heading",
+        "Some query name",
         "This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. ",
         qry="",
         params=[
@@ -86,7 +86,24 @@ queries = [
         allowed=[],
         headers=["Name", "Age (Years)", "Height (m)"],
         method="POST",
-    )
+    ),
+    QueryWrapper(
+        "This is another query",
+        "This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. ",
+        qry="",
+        params=[
+            {
+                "placeholder": "Enter a name",
+                "required": "false",
+                "type": "text",
+                "default": "Some Name",
+            },
+            {"placeholder": "Enter a age", "required": "true", "type": "number"},
+        ],
+        allowed=[],
+        headers=["Name", "Age (Years)", "Height (m)"],
+        method="POST",
+    ),
 ]
 
 
