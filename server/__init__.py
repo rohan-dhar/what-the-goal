@@ -1,7 +1,7 @@
 from flask import Flask, g
 from .auth import auth_bp
 from .db import close_db, setup_db
-from .queries import queries_bp
+from .queries_views import queries_bp
 
 
 app = Flask(__name__)
