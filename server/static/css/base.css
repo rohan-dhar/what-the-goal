@@ -220,7 +220,7 @@ table tr:nth-of-type(2n) {
 .header {
 	width: 80%;
 	top: 4%;
-	left: 10%;
+	left: 10%`;
 	position: fixed;
 	display: flex;
 	justify-content: space-between;
