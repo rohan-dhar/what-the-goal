@@ -18,7 +18,7 @@ class LoginView(LoggedOutView):
                 request.form["email"] == "lol@lol.com"
                 and request.form["password"] == "test"
             ):
-                session["user_id"] = 1
+                session["user_id"] = 10257
                 return redirect(url_for("queries.index"))
             else:
                 error = "Incorrect username or password. Please try again with correct credentials"

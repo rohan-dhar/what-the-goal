@@ -1,53 +1,70 @@
-{% extends 'base.html' %}{% block header %} <a class="badge" href="{{ url_for('queries.index') }}">< Back to all queries</a>  Run the query {% endblock
-    header %} {% block title %} Query {% endblock title %} {% block
-content %}
+{% extends 'base.html' %}{% block header %}
+<a class="badge" href="{{ url_for('queries.index') }}">< Back to all queries</a>
+Run the query {% endblock header %} {% block title %} Query {% endblock title %}
+{% block content %}
 
 <main class="main">
 	<h1 class="head">{{heading}}</h1>
 	<p class="text">{{text}}</p>
 	{% if params|length > 0 %}
-        <form class="sub-main query-params" method="{{method}}" action="#">
-            <h3>Filter your query</h3>
-                {% for param in params %}        
-                    <input 
-                        class="inp"
-                        {% for name, value in param.items() %}
-                            {{ name }}="{{ value }}"
-                        {% endfor %}
-                    />
-                {% endfor %}
-                <button class='btn'>Go</button>
-        </form>    
-    {% endif %}
+	<form class="sub-main query-params" method="{{method}}" action="#">
+		<h3>Filter your query</h3>
+		{% for param in params %}
+		<input
+			class="inp"
+			{%
+			for
+			name,
+			value
+			in
+			param.items()
+			%}
+			{{
+			name
+			}}="{{ value }}"
+			{%
+			endfor
+			%}
+		/>
+		{% endfor %}
+		<button class="btn">Go</button>
+	</form>
+	{% endif %} {% if query %}
+	<section class="sub-main query-text">
+		<h3>Query Executed</h3>
+		<p>{{ query }}</p>
+	</section>
+	{% endif %}
 
-	{% if results|length > 0 %}
-        <section class="sub-main query-results">
-            <h3>Query Results</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            {% for header in headers %}
-                                <th>{{ header }}</th>
-                            {% endfor %}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for row in results %}
-                            <tr>
-                                <td>{{ loop.index}}</td>
-                                {% for value in row %}
-                                    <td>{{ value }}</td>
-                                {% endfor %}
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-        </form>    
-    {% endif %}
-
-
-    </section>
+	<section class="sub-main query-results">
+		<h3>Query Results</h3>
+		{% if results|length > 0 %}
+		<table>
+			<thead>
+				<tr>
+					<th>#</th>
+					{% for header in headers %}
+					<th>{{ header }}</th>
+					{% endfor %}
+				</tr>
+			</thead>
+			<tbody>
+				{% for row in results %}
+				<tr>
+					<td>{{ loop.index}}</td>
+					{% for value in row %}
+					<td>{{ value }}</td>
+					{% endfor %}
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		{% else %}
+		<section class="query-results-none">
+			Could not find any results for the query
+		</section>
+		{% endif %}
+	</section>
 </main>
 
 {% endblock %}

@@ -1,4 +1,4 @@
-from flask import g
+from flask import g, session
 from pymysql import cursors
 import pymysql
 
@@ -14,18 +14,16 @@ db_conf = {
 def setup_db(app):
     @app.before_request
     def setup():
-        print("INHERE")
         if "db" in g:
-            print("ALREADY")
             return
 
         db = pymysql.connect(
             **db_conf,
-            cursorclass=cursors.DictCursor,
             autocommit=True,
         )
-
         g.db = db
+        user_id = session.get("user_id", None)
+        g.user_id = user_id
 
 
 def close_db(exception):

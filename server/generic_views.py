@@ -1,9 +1,8 @@
-from flask.globals import session
+from flask.globals import g
 from flask.helpers import url_for
 from flask.views import View
 from flask import render_template, request
 from werkzeug.utils import redirect
-from .utils import get_user_id
 
 
 LOGGED_IN_PATH = "queries.index"
@@ -23,7 +22,7 @@ class TemplateView(View):
 
 class LoggedInView(TemplateView):
     def render(self, *args, **kwargs):
-        user_id = get_user_id()
+        user_id = g.user_id
         if user_id is not None:
             return super().render(*args, **kwargs)
 
@@ -32,7 +31,7 @@ class LoggedInView(TemplateView):
 
 class LoggedOutView(TemplateView):
     def render(self, *args, **kwargs):
-        user_id = get_user_id()
+        user_id = g.user_id
         if user_id is None:
             return super().render(*args, **kwargs)
 
